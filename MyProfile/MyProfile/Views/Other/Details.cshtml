@@ -1,0 +1,40 @@
+﻿@model MyProfile.Models.Other
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Details Other</h1>
+
+<div>
+
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CvPath)
+        </dt>
+        <dd class = "col-sm-10">
+            <iframe width="600" height="300" class="embed-responsive-item" src="@Url.Content("/assets/Image/ImageAndFileOther/"+Model.CvPath)" allowfullscreen></iframe>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ImageSiteBarPath)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="@Url.Content("/assets/Image/ImageAndFileOther/"+Model.ImageSiteBarPath)" class="img-thumbnail" width="350" height="600" />
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Resume)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Resume.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="text-warning">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+<br />
+<br />
+<br />

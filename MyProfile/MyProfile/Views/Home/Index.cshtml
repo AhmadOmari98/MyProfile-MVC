@@ -1,0 +1,460 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model MyProfile.Models.ContactUs
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- ======= About Section ======= -->
+<section id="about" class="about">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>About Me</h2>
+            <p>@ViewBag.myBasicInfo.AboutMe</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4" data-aos="fade-right">
+                <img src="@Url.Content("~/assets/Image/ImageUser/"+ViewBag.myBasicInfo.ImagePath)" class="img-fluid" alt="">
+            </div>
+            <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
+                <h3>@ViewBag.myBasicInfo.Position</h3>
+                <p class="fst-italic">
+                    
+                </p>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul>
+                            <li><i class="bi bi-chevron-right"></i> <strong>E-mail :</strong> <span><a href="mailto:@ViewBag.myBasicInfo.Email" target="_blank" class="text-dark">@ViewBag.myBasicInfo.Email</a></span></li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span><a href="tel:@ViewBag.myBasicInfo.Phone" class="text-dark">@ViewBag.myBasicInfo.Phone</a></span></li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>Address:</strong> <span>@ViewBag.myBasicInfo.Address</a></span></li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>@ViewBag.myBasicInfo.Birthday.ToString("dd MMMM yyyy") </span></li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>Linkedin:</strong> <span><a href="@ViewBag.myBasicInfo.LinkLinkedin" target="_blank" class="text-primary">@ViewBag.myBasicInfo.LinkLinkedin</a></span></li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>GitHub:</strong> <span><a href="@ViewBag.myBasicInfo.LinkGitHub" target="_blank" class="text-primary">@ViewBag.myBasicInfo.LinkGitHub</a></span></li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>Cv:</strong> <span><a href="@Url.Content("./assets/Image/ImageAndFileOther/"+Context.Session.GetString("cvPath"))" download="Resume - Ahmad M AL-Omari" class="" target="_blank"><i class="bi bi-download"></i>Download</a></span></li>
+                        </ul>
+                    </div>
+                    <!--<div class="col-lg-6">
+                        <ul>
+                            
+                            <li><i class="bi bi-chevron-right"></i> <strong>PhEmailone:</strong> <span>email@example.com</span></li>
+                            <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
+                        </ul>
+                    </div>-->
+                </div>
+                <p>
+ 
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section><!-- End About Section -->
+
+
+
+
+<!-- ======= Education & Experience Section ======= -->
+<section id="educationAndExperience" class="resume">
+      <div class="container">
+
+        <div class="section-title">
+            <h2>Education & Experience</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-up">
+            <h3 class="resume-title">Education</h3>
+            
+                    @foreach (var item in ViewBag.educations)
+                    {
+
+                       
+                            dynamic dateTo="";
+                            @if (item.DateTo >= DateTime.Now)
+                            {
+                                dateTo = "Present";
+                            }
+                            else
+                            {
+                                dateTo = item.DateTo.ToString("MMMM yyyy");
+                            }
+                        
+                        <div class="resume-item">
+                        <h4>@item.DegreeName, @item.SectionName</h4>
+                        <h5>@item.DateFrom.ToString("MMMM yyyy")  - @dateTo </h5>
+                        <p><em>Grade: @item.Grade </em></p>
+                            <p>
+                            <img src="@Url.Content("~/assets/Image/InstitutionLogo/"+item.InstitutionLogoPath)" class="img-thumbnail rounded-circle" width="50" height="50" alt=""> &nbsp;
+                                <em>@item.Institution</em>
+                            </p>
+                            <p></p>
+                        </div>
+
+                    }
+          </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="resume-title">Professional Experience</h3>
+                @foreach (var item in ViewBag.experiences)
+                    {
+
+                       
+                            dynamic dateTo="";
+                            @if (item.DateTo >= DateTime.Now)
+                            {
+                                dateTo = "Present";
+                            }
+                            else
+                            {
+                                dateTo = item.DateTo.ToString("MMMM yyyy");
+                            }
+
+                            <div class="resume-item">
+                                <h4>@item.Position</h4>
+                                <h5>@item.DateFrom.ToString("MMMM yyyy") - @dateTo</h5>
+                                <p>
+                            <img src="@Url.Content("~/assets/Image/CompanyLogo/"+item.CompanyLogoPath)" class="img-thumbnail rounded-circle" width="50" height="50" alt=""> &nbsp;
+                                    <em>@item.CompanyName, @item.Address</em>
+                                </p>
+                                <ul>
+                                    <li>@item.Description</li>
+                                    
+                                </ul>
+                            </div>
+
+                    }
+
+                
+
+
+
+            </div>
+        </div>
+
+      </div>
+</section><!-- End Education & Experience Section -->
+
+
+
+<!-- ======= Skills Section ======= -->
+<section id="skills" class="skills section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Skills</h2>
+            <p></p>
+        </div>
+
+       
+        <div class="row skills-content mb-3">
+            <div class="col-lg-4" data-aos="fade-up">
+                <ul style="list-style-type:none;">
+                    @foreach (var item in ViewBag.skillsProgrammingLanguages)
+                    {
+                        <li><i class="bi bi-chevron-right"></i> <strong>@item.SkillName</strong> <span></span></li>
+                    }
+                </ul>
+            </div>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <ul style="list-style-type:none;">
+                    @foreach (var item in ViewBag.skillsBackend)
+                    {
+                            <li><i class="bi bi-chevron-right"></i> <strong>@item.SkillName</strong> <span></span></li>
+                    }
+                </ul>
+            </div>
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <ul style="list-style-type:none;">
+                    @foreach (var item in ViewBag.skillsFrontend)
+                    {
+                        <li><i class="bi bi-chevron-right"></i> <strong>@item.SkillName</strong> <span></span></li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="row skills-content">
+            <div class="col-lg-5 offset-lg-2" data-aos="fade-up">
+                <ul style="list-style-type:none;">
+                    @foreach (var item in ViewBag.skillsDatabase)
+                    {
+                        <li><i class="bi bi-chevron-right"></i> <strong>@item.SkillName</strong> <span></span></li>
+                    }
+                </ul>
+            </div>
+            <div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
+                <ul style="list-style-type:none;">
+                    @foreach (var item in ViewBag.skillsOther)
+                    {
+                        <li><i class="bi bi-chevron-right"></i> <strong>@item.SkillName</strong> <span></span></li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section><!-- End Skills Section -->
+
+
+
+
+<!-- ======= Projects  Section ======= -->
+<section id="project" class="resume">
+      <div class="container">
+
+        <div class="section-title">
+            <h2>Projects </h2>
+        </div>
+
+        <div class="container">
+            <div class="row" data-aos="fade-up">
+            <!--<h3 class="resume-title">Education</h3>-->
+                     @foreach (var item in ViewBag.projects)
+                    {
+
+                       
+                            dynamic dateTo="";
+                            @if (item.DateTo >= DateTime.Now)
+                            {
+                                dateTo = "Present";
+                            }
+                            else
+                            {
+                                dateTo = item.DateTo.ToString("MMMM yyyy");
+                            }
+
+                        <div class="resume-item col-lg-6">
+                            <h4>
+                                <img src="@Url.Content("~/assets/Image/ProjectLogo/"+item.ProjectLogoPath)" class="img-thumbnail rounded" width="50" height="50" alt=""> &nbsp;
+                                @item.Name 
+                            </h4>
+                            <div class="d-flex justify-content-between  p-2">
+                                <div>
+                                    <h5>@item.DateFrom.ToString("MMMM yyyy")  - @dateTo </h5>
+                                </div>
+                                <div>
+                                    <a class="btn btn-outline-light btn-sm border border-dark rounded-pill text-dark " href="@item.Link" target="_blank">Show Project <i class="bi bi-box-arrow-up-right"></i></a>
+                                </div>
+                            </div>
+                        
+                            <p style="text-align:justify;padding:2%"><strong>Description:</strong> @Html.Raw(item.Description)</p>
+                                <p>
+                             
+                                    <em></em>
+                                </p>
+                                <p></p>
+                        </div>
+
+                    }
+          </div>
+            
+        </div>
+
+      </div>
+</section><!-- End Projects  Section -->
+
+
+<!-- ======= Certifications  Section ======= -->
+<section id="certifications" class="resume">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Certifications </h2>
+        </div>
+
+        <div class="container">
+            <div class="row" data-aos="fade-up">
+                <!--<h3 class="resume-title">Education</h3>-->
+                @foreach (var item in ViewBag.certifications)
+                {
+
+
+                    dynamic dateTo = "";
+                    @if (item.DateCourse >= DateTime.Now)
+                    {
+                        dateTo = "Present";
+                    }
+                    else
+                    {
+                        dateTo = item.DateCourse.ToString("MMMM yyyy");
+                    }
+
+                    <div class="resume-item col-lg-6">
+                        <h4>
+                            
+                            @item.CourseName
+                        </h4>
+                        <h5> @dateTo </h5>
+                        <!--<p style="text-align:justify;padding:2%"><strong>Description:</strong> </p>-->
+                        <div class="d-flex justify-content-between  p-2">
+                            <div>
+                                <img src="@Url.Content("~/assets/Image/certificationPath/"+item.InstitutionLogoPath)" class="img-thumbnail rounded" width="50" height="50" alt=""> &nbsp;
+                                <em>@item.InstitutionName</em>
+                            </div>
+                            <div>
+                                <a class="btn btn-outline-light btn-sm border border-dark rounded-pill text-dark " href="@item.Link" target="_blank">Show Certificate <i class="bi bi-box-arrow-up-right"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                }
+            </div>
+
+        </div>
+
+    </div>
+</section><!-- End Certifications  Section -->
+
+
+
+<!-- ======= Languages  Section ======= -->
+<section id="languages" class="skills section-bg">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Languages </h2>
+            <p></p>
+        </div>
+
+
+        <div class="row skills-content mb-3">
+            <div class="col-lg-6" data-aos="fade-up">
+                <ul style="list-style-type:none;">
+                    @foreach (var item in ViewBag.languages)
+                    {
+                        <li><i class="bi bi-chevron-right"></i> <strong>@item.LanguageName</strong> <span></span></li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+</section><!-- End Languages  Section -->
+
+
+
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Contact</h2>
+        </div>
+
+        <div class="row" data-aos="fade-in">
+
+            <div class="col-lg-5 d-flex align-items-stretch">
+                <div class="info">
+                    <div class="address">
+                        <i class="bi bi-geo-alt"></i>
+                        <h4>Location:</h4>
+                        <p>@ViewBag.myBasicInfo.Address</p>
+                    </div>
+
+                    <div class="email">
+                        <i class="bi bi-envelope"></i>
+                        <h4>Email:</h4>
+                        <p><a href="mailto:@ViewBag.myBasicInfo.Email" target="_blank" class="text-dark">@ViewBag.myBasicInfo.Email</a></p>
+                    </div>
+
+                    <div class="phone">
+                        <i class="bi bi-phone"></i>
+                        <h4>Call:</h4>
+                        <p><a href="tel:@ViewBag.myBasicInfo.Phone" class="text-dark">@ViewBag.myBasicInfo.Phone</a></p>
+                    </div>
+
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53808.19199347069!2d35.812389968753365!3d32.5525249961324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c76916dac0453%3A0x5416e113d81f7d82!2sIrbid!5e0!3m2!1sen!2sjo!4v1674651351409!5m2!1sen!2sjo" frameborder="0" style="border:0; width: 100%; height: 290px;" allowfullscreen></iframe>
+                </div>
+               
+            </div>
+
+            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+
+               <div class="info">
+                    <form asp-action="CreateNewContactUs" asp-controller="Home">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row mb-3">
+                            <div class="form-group col-6">
+                                <label class="control-label">Your Name</label>
+                                <input asp-for="Name" class="form-control" required/>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-6">
+                                <label class="control-label">Your Phone Number</label>
+                                <input asp-for="Phonenumber" class="form-control" required />
+                                <span asp-validation-for="Phonenumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" type="email" required />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Subject" class="control-label"></label>
+                            <textarea asp-for="Subject" class="form-control" rows="1" required></textarea>
+                            <span asp-validation-for="Subject" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-1">
+                            <label asp-for="Message" class="control-label"></label>
+                            <textarea asp-for="Message" class="form-control" rows="10" required></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" name="copyMessage" >
+                            <label class="form-check-label">
+                                Send me a copy of this message
+                            </label>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-info">Send message</button>
+                        </div>
+                    </form>
+                </div>
+                <!--<form asp-action="CreateNewContactUs" asp-controller="Home" class="php-email-form" >
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="name">Your Name</label>
+                            <input type="text" asp-for="Item6.Name" name="name" class="form-control">
+                            <span asp-validation-for="Item6.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="name">Your Email</label>
+                            <input type="email" class="form-control" name="email" asp-for="Item6.Email" >
+                            <span asp-validation-for="Item6.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Subject</label>
+                        <input type="text" class="form-control" name="subject" asp-for="Item6.Subject">
+                        <span asp-validation-for="Item6.Subject" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Message</label>
+                        <textarea class="form-control" name="message" rows="10" asp-for="Item6.Message"></textarea>
+                        <span asp-validation-for="Item6.Message" class="text-danger"></span>
+                    </div>
+                    <div class="my-3">
+                        <div class="loading">Loading</div>
+                        <div class="error-message"></div>
+                        <div class="sent-message">Your message has been sent. Thank you!</div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit">Send Message</button>
+                     </div>
+                </form>-->
+            </div>
+
+        </div>
+
+    </div>
+</section><!-- End Contact Section -->
+
+
+
+
+
+

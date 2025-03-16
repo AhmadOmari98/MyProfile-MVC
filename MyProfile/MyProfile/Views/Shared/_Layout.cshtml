@@ -1,0 +1,135 @@
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <title>@ViewData["Title"] - MyProfile</title>
+    <!--<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />-->
+
+      <!-- Favicons -->
+      <link href="~/assets/template/img/ee.JPG" rel="icon">
+        <link href="~/assets/template/img/ee.JPG" rel="apple-touch-icon">
+
+       <!-- Google Fonts -->
+       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+      <!-- Ven dor CS S Files -->
+      <link href="~/assets/template/vendor/aos/aos.css" rel="stylesheet">
+      <link href="~/assets/template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="~/assets/template/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+      <link href="~/assets/template/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+      <link href="~/assets/template/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+      <link href="~/assets/template/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+      <!-- Template Main C SS Fil e -->
+      <link href="~/assets/template/css/style.css" rel="stylesheet">
+      <link href="~/assets/template/css/bgImage.css" rel="stylesheet">
+
+
+</head>
+<body>
+
+    <!-- ======= Mobile nav toggle button ======= -->
+    <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+
+    <!-- ======= Header ======= -->
+    <header id="header">
+        <div class="d-flex flex-column">
+
+            <div class="profile">
+                <img src="@Url.Content("~/assets/Image/ImageAndFileOther/"+Context.Session.GetString("imageSiteBarPath"))" alt="" class="img-fluid rounded-circle">
+                <h1 class="text-light">
+                    <a href="index.html"> @Context.Session.GetString("fName") @Context.Session.GetString("lName")</a>
+                </h1>
+                <div class="social-links mt-3 text-center">
+                    <a href="@Context.Session.GetString("linkLinkedin")" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
+                    <a href="@Context.Session.GetString("linkGitHub")" class="linkedin" target="_blank"><i class="bi bi-github"></i></a>
+                    <a href="mailto:@Context.Session.GetString("email")" class="linkedin" target="_blank"><i class="bi bi-envelope"></i></a>
+                    <a href="@Url.Content("./assets/Image/ImageAndFileOther/"+Context.Session.GetString("cvPath"))" download="Resume - Ahmad M AL-Omari" class="" target="_blank"><i class="bi bi-download"></i></a>
+                </div>
+            </div>
+
+            <nav id="navbar" class="nav-menu navbar" >
+                <ul>
+                    <li><a href="#hero" class="nav-link scrollto active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+                    <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>About</span></a></li>
+                    <li><a href="#educationAndExperience" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Education & Experience</span></a></li>
+                    <li><a href="#skills" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Skills</span></a></li>
+                    <li><a href="#project" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Projects</span></a></li>
+                    <li><a href="#certifications" class="nav-link scrollto"><i class="bi bi-archive"></i> <span>Certifications</span></a></li>
+                    <li><a href="#languages" class="nav-link scrollto"><i class="bi bi-translate"></i> <span>Languages</span></a></li>
+                    <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contact</span></a></li>
+                </ul>
+            </nav><!--.nav-menu -->
+        </div>
+    </header><!-- End Header -->
+
+
+    <!-- ======= Hero Section ======= -->
+
+    <section id="hero" class="d-flex flex-column justify-content-center align-items-center img-thumbnail" style="">
+        <div class="hero-container" data-aos="fade-in">
+            <h1> @Context.Session.GetString("fName") @Context.Session.GetString("mName") @Context.Session.GetString("lName")</h1>
+            <p>I'm <span class="typed" data-typed-items="Developer, Freelancer"></span></p>
+        </div>
+    </section><!-- End Hero -->
+
+
+
+
+
+
+
+
+
+    <div class="container-fluid">
+        <main id="main">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong><span>MyProfile</span></strong>
+            </div>
+            <div class="credits">
+               
+            </div>
+        </div>
+    </footer><!-- End  Footer -->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="~/assets/template/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="~/assets/template/vendor/aos/aos.js"></script>
+    <script src="~/assets/template/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/template/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="~/assets/template/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/assets/template/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="~/assets/template/vendor/typed.js/typed.min.js"></script>
+    <script src="~/assets/template/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="~/assets/template/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/assets/template/js/main.js"></script>
+
+   <!-- <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - MyProfile - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+     </footer>-->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

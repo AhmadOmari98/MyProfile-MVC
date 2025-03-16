@@ -1,0 +1,236 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<MyProfile.Models.ContactUs>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $("#replyIt").modal('show');
+    });
+</script>
+<h1>ContactUs Table</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary btn-sm float-end">Create New ContactUs</a>
+    <br />
+</p>
+<table class="table table-hover"
+       id="table"
+       data-show-export="true"
+       data-export-types="['json', 'xml','csv', 'txt', 'sql', 'doc', 'excel', 'pdf']"
+       data-export-options='{"fileName": "TableFile"}'
+       data-show-columns="true"
+       data-show-toggle="true"
+       data-search="true"
+       data-pagination="true"
+       data-resizable="true"
+       data-show-pagination-switch="true"
+       data-show-fullscreen="true"
+       data-show-print="true"
+       data-show-copy-rows="true">
+    <thead>
+        <tr class="text-center table-dark">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phonenumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Respond)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resume)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phonenumber)
+                </td>
+                <td>
+                    <textarea class="form-control" rows="2" readonly style="width:250px;">@Html.DisplayFor(modelItem => item.Subject)</textarea>
+                </td>
+                <td>
+                    <textarea class="form-control" rows="3" readonly style="width:250px;">@Html.DisplayFor(modelItem => item.Message)</textarea>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Respond)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resume.Name)
+                </td>
+                <td>
+                    <a asp-action="SelectReplyItId" asp-route-id="@item.Id"  style="cursor: pointer;" class="text-success">Reply It</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="text-warning">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="text-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>@ViewBag.showModal</h1>
+
+@if (ViewBag.showModal == "Show")
+{
+   <!-- Modal Reply It asp-action="Delete" asp-route-id="item.Id" -->
+   <div class="modal fade" id="replyIt" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="replyItLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="replyItLabel">Reply It</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form asp-action="ReplyAMessage" asp-controller="ContactUs">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Subject</label>
+                                <textarea class="form-control"  rows="2" name="replySubject"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-control" rows="6" name="replyMessage"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+}
+
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+<h1>History ContactUs</h1>
+
+
+<table class="table table-hover"
+       id="table1"
+       data-show-export="true"
+       data-export-types="['json', 'xml','csv', 'txt', 'sql', 'doc', 'excel', 'pdf']"
+       data-export-options='{"fileName": "TableFile"}'
+       data-show-columns="true"
+       data-show-toggle="true"
+       data-search="true"
+       data-pagination="true"
+       data-resizable="true"
+       data-show-pagination-switch="true"
+       data-show-fullscreen="true"
+       data-show-print="true"
+       data-show-copy-rows="true">
+    <thead>
+        <tr class="text-center table-dark">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phonenumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Respond)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resume)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.historyContactUs)
+        {
+            <tr class="text-center">
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.Phonenumber
+                </td>
+                <td>
+                    <textarea class="form-control" rows="2" readonly style="width:250px;">@item.Subject</textarea>
+                </td>
+                <td>
+                    <textarea class="form-control" rows="3" readonly style="width:250px;">@item.Message</textarea>
+                </td>
+                <td>
+                    @item.Respond
+                </td>
+                <td>
+                    @item.Resume.Name
+                </td>
+                <td>
+                    <a asp-action="SelectReplyItId" asp-route-id="@item.Id" style="cursor: pointer;" class="text-success">Reply It</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="text-warning">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="text-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">Delete</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<br />
+<br />
+<br />
+<script>
+
+    $(function () {
+        $('#table').bootstrapTable()
+    })
+
+    $(function () {
+        $('#table1').bootstrapTable()
+    })
+
+
+</script>

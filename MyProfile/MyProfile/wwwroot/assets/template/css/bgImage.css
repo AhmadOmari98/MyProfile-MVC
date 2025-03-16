@@ -1,0 +1,16 @@
+﻿#hero {
+    background-image: url('/assets/Image/ImageUser/30.png');
+}
+
+
+@media (max-width: 1025px) {
+    #hero{
+        background-image: url('/assets/Image/ImageUser/31.png');
+    }
+}
+
+@media (max-width: 500px) {
+    #hero {
+        background-image: url('/assets/Image/ImageUser/32.JPG');
+    }
+}

@@ -1,0 +1,47 @@
+﻿@model MyProfile.Models.Other
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Create New Other</h1>
+
+
+<hr />
+<div class="row container">
+    <div class="col-md-12">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row mb-3">
+                <div class="form-group col-4">
+                    <label asp-for="CvFile" class="control-label"></label>
+                    <input asp-for="CvFile" class="form-control" accept="application/pdf" />
+                    <span asp-validation-for="CvFile" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="ImageSiteBarFile" class="control-label"></label>
+                    <input asp-for="ImageSiteBarFile" class="form-control" accept="image/*" />
+                    <span asp-validation-for="ImageSiteBarFile" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="ResumeId" class="control-label"></label>
+                    <select asp-for="ResumeId" class ="form-control" asp-items="ViewBag.ResumeId"></select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" /> | 
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
